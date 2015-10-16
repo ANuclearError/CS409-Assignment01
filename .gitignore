@@ -17,6 +17,9 @@ hs_err_pid*
 *.log
 *.synctex.gz
 *.toc
+*.bbl
+*.blg
+*.pdf
 
 #IntelliJ
 *.iml
