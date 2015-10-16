@@ -1,0 +1,24 @@
+CS409-ASSIGNMENT01 VERSION HISTORY
+
+================================================================================
+
+Version 0 : Initial Setup
+Commenced : 2015-10-15
+Finished  : -
+
+--------------------------------------------------------------------------------
+
+v0.0 - 2015-10-15
+
+    - Created the basic structure of the document, adding the temporary files to
+      .gitignore. Since this is for all intents and purposes a template, this
+      will most likely change.
+
+v0.01 - 2015-10-16
+
+    - I have an idea! I am now creating ABACUS. I have added informaiton to the
+      report with a short introduction on what ABACUS will do. 
+    - As a result, I have created the basic project structure for the software,
+      and added the driver class currently printing information about project. 
+    - Also decided to merge the two VERSIONHISTORY files I was planning to have,
+      no point really.
