@@ -1,5 +1,11 @@
 package com.aidanogrady.project_abacus;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 /**
  * This is responsible for holding the main method, creating the objects that
  * kick off the control flow.
@@ -7,7 +13,7 @@ package com.aidanogrady.project_abacus;
  * @author Aidan O'Grady
  * @since 0.0
  */
-public class Driver {
+public class Driver extends Application{
 
 	/**
 	 * The main method which sets off control flow.
@@ -15,17 +21,17 @@ public class Driver {
 	 * @param args - parameters of the program.
 	 */
 	public static void main(String[] args) {
-		// Right now we're not actually doing anything, so print info!
-		String acronym = "Project ABACUS";
-		String version = "v0.0";
-		String name = "A Benevolent Analysis of Codes' Unsavoury Smells";
-		String author = "By Aidan O'Grady";
-		System.out.println(acronym + " " + version);
-		System.out.println(name);
-		System.out.println(author);
-		for (int i = 0; i < 80; i++) {
-			System.out.print("-");
-		}
-		System.out.println();
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		String fxml = "/com/aidanogrady/project_abacus/fxml/abacus.fxml";
+		Parent root = FXMLLoader.load(getClass().getResource(fxml));
+		Scene scene = new Scene(root, 1280, 720);
+
+		primaryStage.setTitle("ABACUS");
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 }

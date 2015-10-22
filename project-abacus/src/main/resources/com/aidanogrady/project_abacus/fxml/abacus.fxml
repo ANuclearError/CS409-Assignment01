@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox id="vbox" prefHeight="1280" prefWidth="720"
+      xmlns:fx="http://javafx.com/fxml">
+    <MenuBar fx:id="menubar">
+        <menus>
+            <Menu text="File">
+                <MenuItem text="Open Folder"/>
+                <SeparatorMenuItem/>
+                <MenuItem text="Exit"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About"/>
+            </Menu>
+        </menus>
+    </MenuBar>
+</VBox>
