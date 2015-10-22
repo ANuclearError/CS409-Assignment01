@@ -1,4 +1,4 @@
-package com.aidanogrady.project_abacus;
+package com.aidanogrady.abacus;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
