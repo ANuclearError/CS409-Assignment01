@@ -8,7 +8,7 @@ certain screens), and the screen which displays the analysis of the source
 folder.
 -->
 <MenuBar fx:id="menubar"
-         fx:controller="com.aidanogrady.abacus.controller.MenuController"
+         fx:controller="com.aidanogrady.abacus.controller.Controller"
          xmlns:fx="http://javafx.com/fxml">
         <Menu text="File">
                 <MenuItem text="Open Folder" onAction="#open"/>

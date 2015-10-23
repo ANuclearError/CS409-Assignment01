@@ -2,6 +2,10 @@ package com.aidanogrady.abacus.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
+
+import java.io.File;
 
 /**
  * The Menu Controller acts the controller for the menu bar of the application.
@@ -10,7 +14,10 @@ import javafx.fxml.FXML;
  * @author Aidan O'Grady
  * @since 0.1
  */
-public class MenuController {
+public class Controller {
+
+	@FXML
+	private Stage stage;
 
 	@FXML
 	public void about(ActionEvent actionEvent) {
@@ -50,6 +57,14 @@ public class MenuController {
 
 	@FXML
 	public void open(ActionEvent actionEvent) {
-		System.out.println("Opening folder");
+		DirectoryChooser chooser = new DirectoryChooser();
+		chooser.setTitle("Open Source Folder");
+
+		File directory = chooser.showDialog(stage);
+		if (directory != null) {
+			System.out.println("Selected: " + directory.getPath());
+		} else {
+			System.out.println("No directory selected");
+		}
 	}
 }
