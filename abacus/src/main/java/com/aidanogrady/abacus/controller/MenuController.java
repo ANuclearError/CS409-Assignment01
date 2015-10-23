@@ -4,8 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 /**
- * Created by Aidan O'Grady on 22/10/15.
+ * The Menu Controller acts the controller for the menu bar of the application.
+ * When a menu item is acted upon, it's corresponding method will be called.
  *
+ * @author Aidan O'Grady
+ * @since 0.1
  */
 public class MenuController {
 
