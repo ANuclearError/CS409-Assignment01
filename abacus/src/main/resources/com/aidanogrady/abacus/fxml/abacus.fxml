@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<MenuBar fx:id="menubar"
+         fx:controller="com.aidanogrady.abacus.controller.MenuController"
+         xmlns:fx="http://javafx.com/fxml">
+        <Menu text="File">
+                <MenuItem text="Open Folder" onAction="#open"/>
+                <SeparatorMenuItem/>
+                <MenuItem text="Exit" onAction="#exit"/>
+        </Menu>
+        <Menu text="View">
+                <MenuItem text="Large Classes"
+                          onAction="#displayLargeClasses"/>
+                <MenuItem text="Large Methods"
+                          onAction="#displayLargeMethods"/>
+                <MenuItem text="Long Parameter Lists"
+                          onAction="#displayLongParamLists"/>
+                <MenuItem text="Primitive Obsession"
+                          onAction="#displayPrimitiveObsession"/>
+                <MenuItem text="Data Clumps"
+                          onAction="#displayDataClumps"/>
+        </Menu>
+        <Menu text="Help">
+                <MenuItem text="About" onAction="#about"/>
+        </Menu>
+</MenuBar>

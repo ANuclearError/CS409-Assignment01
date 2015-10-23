@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * This is responsible for holding the main method, creating the objects that
  * kick off the control flow.
@@ -26,7 +29,7 @@ public class Driver extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		String fxml = "/com/aidanogrady/project_abacus/fxml/abacus.fxml";
+		String fxml = "/com/aidanogrady/abacus/fxml/abacus.fxml";
 		Parent root = FXMLLoader.load(getClass().getResource(fxml));
 		Scene scene = new Scene(root, 1280, 720);
 
