@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+
 <!--
 The GUI for ABACUS is defined as below. There are two primary sections, the
 menu bar which is how the user will do everything (opening folders, showing
 certain screens), and the screen which displays the analysis of the source
 folder.
 -->
-<MenuBar fx:id="menubar"
-         fx:controller="com.aidanogrady.abacus.controller.Controller"
-         xmlns:fx="http://javafx.com/fxml">
-        <Menu text="File">
+<BorderPane fx:id="root"
+            fx:controller="com.aidanogrady.abacus.controller.Controller"
+            xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <MenuBar fx:id="menubar">
+            <Menu text="File">
                 <MenuItem text="Open Folder" onAction="#open"/>
                 <SeparatorMenuItem/>
                 <MenuItem text="Exit" onAction="#exit"/>
-        </Menu>
-        <Menu text="View">
+            </Menu>
+            <Menu text="View">
                 <MenuItem text="Large Classes"
                           onAction="#displayLargeClasses"/>
                 <MenuItem text="Large Methods"
@@ -26,8 +30,14 @@ folder.
                           onAction="#displayPrimitiveObsession"/>
                 <MenuItem text="Data Clumps"
                           onAction="#displayDataClumps"/>
-        </Menu>
-        <Menu text="Help">
+            </Menu>
+            <Menu text="Help">
                 <MenuItem text="About" onAction="#about"/>
-        </Menu>
-</MenuBar>
+            </Menu>
+        </MenuBar>
+    </top>
+    <center>
+    </center>
+    <bottom>
+    </bottom>
+</BorderPane>

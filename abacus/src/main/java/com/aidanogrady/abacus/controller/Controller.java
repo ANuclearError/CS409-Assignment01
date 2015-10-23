@@ -1,9 +1,7 @@
 package com.aidanogrady.abacus.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -17,50 +15,46 @@ import java.io.File;
 public class Controller {
 
 	@FXML
-	private Stage stage;
-
-	@FXML
-	public void about(ActionEvent actionEvent) {
+	public void about() {
 		System.out.println("Showing about");
 	}
 
 	@FXML
-	public void displayDataClumps(ActionEvent actionEvent) {
+	public void displayDataClumps() {
 		System.out.println("Displaying data clumps screen.");
 	}
 
 	@FXML
-	public void displayLargeClasses(ActionEvent actionEvent) {
+	public void displayLargeClasses() {
 		System.out.println("Displaying large classes screen.");
 	}
 
 	@FXML
-	public void displayLargeMethods(ActionEvent actionEvent) {
+	public void displayLargeMethods() {
 		System.out.println("Displaying large methods screen.");
 	}
 
 	@FXML
-	public void displayLongParamLists(ActionEvent actionEvent) {
+	public void displayLongParamLists() {
 		System.out.println("Displaying long parameter list screen.");
 	}
 
 	@FXML
-	public void displayPrimitiveObsession(ActionEvent actionEvent) {
+	public void displayPrimitiveObsession() {
 		System.out.println("Displaying primitive obsession screen.");
 	}
 
 	@FXML
-	public void exit(ActionEvent actionEvent) {
-		System.out.println("Exiting");
+	public void exit() {
 		System.exit(0);
 	}
 
 	@FXML
-	public void open(ActionEvent actionEvent) {
+	public void open() {
 		DirectoryChooser chooser = new DirectoryChooser();
 		chooser.setTitle("Open Source Folder");
 
-		File directory = chooser.showDialog(stage);
+		File directory = chooser.showDialog(null);
 		if (directory != null) {
 			System.out.println("Selected: " + directory.getPath());
 		} else {
