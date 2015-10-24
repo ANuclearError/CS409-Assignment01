@@ -14,7 +14,7 @@ v0.0 - 2015-10-15
       .gitignore. Since this is for all intents and purposes a template, this
       will most likely change.
 
-v0.01 - 2015-10-16
+v0.1 - 2015-10-16
 
     - I have an idea! I am now creating ABACUS. I have added informaiton to the
       report with a short introduction on what ABACUS will do. 
@@ -22,3 +22,10 @@ v0.01 - 2015-10-16
       and added the driver class currently printing information about project. 
     - Also decided to merge the two VERSIONHISTORY files I was planning to have,
       no point really.
+
+v0.2 - 2015-10-23
+
+	- Created basic GUI that has general structure of program.
+	- Created Controller class which influences the GUI.
+	- Created system for choosing folders.
+	- Created about window.

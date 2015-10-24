@@ -31,7 +31,7 @@ public class Driver extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		String fxml = "/com/aidanogrady/abacus/fxml/abacus.fxml";
 		Parent root = FXMLLoader.load(getClass().getResource(fxml));
-		Scene scene = new Scene(root, 1280, 720);
+		Scene scene = new Scene(root);
 
 		primaryStage.setTitle("ABACUS");
 		primaryStage.setScene(scene);

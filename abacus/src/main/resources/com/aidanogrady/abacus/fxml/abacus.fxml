@@ -9,9 +9,12 @@ menu bar which is how the user will do everything (opening folders, showing
 certain screens), and the screen which displays the analysis of the source
 folder.
 -->
+<?import javafx.scene.text.Text?>
 <BorderPane fx:id="root"
             fx:controller="com.aidanogrady.abacus.controller.Controller"
-            xmlns:fx="http://javafx.com/fxml">
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="720"
+            prefWidth="1280">
     <top>
         <MenuBar fx:id="menubar">
             <Menu text="File">
@@ -37,7 +40,9 @@ folder.
         </MenuBar>
     </top>
     <center>
+        <Text fx:id="display"/>
     </center>
     <bottom>
+        <Text fx:id="folderPath"/>
     </bottom>
 </BorderPane>

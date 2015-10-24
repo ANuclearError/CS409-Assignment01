@@ -1,6 +1,8 @@
 package com.aidanogrady.abacus.controller;
 
+import com.aidanogrady.abacus.view.About;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 
 import java.io.File;
@@ -14,34 +16,46 @@ import java.io.File;
  */
 public class Controller {
 
+	private About about;
+
+    @FXML
+    private Text folderPath;
+
+    @FXML
+    private Text display;
+
+    public Controller() {
+        about = new About();
+    }
+
 	@FXML
 	public void about() {
-		System.out.println("Showing about");
+		about.showAbout();
 	}
 
 	@FXML
 	public void displayDataClumps() {
-		System.out.println("Displaying data clumps screen.");
+		display.setText("Data Clumps");
 	}
 
 	@FXML
 	public void displayLargeClasses() {
-		System.out.println("Displaying large classes screen.");
+        display.setText("Large Classes");
 	}
 
 	@FXML
 	public void displayLargeMethods() {
-		System.out.println("Displaying large methods screen.");
+        display.setText("Large Methods");
 	}
 
 	@FXML
 	public void displayLongParamLists() {
-		System.out.println("Displaying long parameter list screen.");
+        display.setText("Long Parameter List");
 	}
 
 	@FXML
 	public void displayPrimitiveObsession() {
-		System.out.println("Displaying primitive obsession screen.");
+        display.setText("Primitive Obsession");
 	}
 
 	@FXML
@@ -56,9 +70,7 @@ public class Controller {
 
 		File directory = chooser.showDialog(null);
 		if (directory != null) {
-			System.out.println("Selected: " + directory.getPath());
-		} else {
-			System.out.println("No directory selected");
+            folderPath.setText(directory.getPath());
 		}
 	}
 }
