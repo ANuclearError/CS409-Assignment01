@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+
+<!--
+The about window is shown below, it displays information about the project to
+user.
+-->
+<?import javafx.scene.text.Text?>
+<GridPane   xmlns:fx="http://javafx.com/fxml" fx:id="about"
+            alignment="center" hgap="10" vgap="10">
+    <Text text="ABACUS v0.0"
+          GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <Text text="by Aidan O'Grady"
+          GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <Text text="A Benevolent Analysis of Codes' Unsavoury Smells"
+          GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+</GridPane>
