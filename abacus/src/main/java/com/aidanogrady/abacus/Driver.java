@@ -1,13 +1,8 @@
 package com.aidanogrady.abacus;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.aidanogrady.abacus.controller.Controller;
+import com.aidanogrady.abacus.view.Output;
 
 /**
  * This is responsible for holding the main method, creating the objects that
@@ -16,7 +11,16 @@ import java.util.ResourceBundle;
  * @author Aidan O'Grady
  * @since 0.0
  */
-public class Driver extends Application{
+public class Driver {
+
+    private static final String ACRONYM = "ABACUS";
+
+    private static final String VERSION = "v0.2";
+
+    private static final String NAME =
+            "A Benevolent Analysis of Codes' Unsavoury Smells";
+
+    private static final String AUTHOR = "Aidan O'Grady - 201218150";
 
 	/**
 	 * The main method which sets off control flow.
@@ -24,17 +28,18 @@ public class Driver extends Application{
 	 * @param args - parameters of the program.
 	 */
 	public static void main(String[] args) {
-		launch(args);
-	}
+        if (args.length == 0) {
+            System.out.println("USAGE: ABACUS.jar directory");
+            System.exit(0);
+        }
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		String fxml = "/com/aidanogrady/abacus/fxml/abacus.fxml";
-		Parent root = FXMLLoader.load(getClass().getResource(fxml));
-		Scene scene = new Scene(root);
+        // Print out basic program info.
+        System.out.println(ACRONYM + " " + VERSION);
+        System.out.println(NAME);
+        System.out.println(AUTHOR);
+        Output.lineBreak();
 
-		primaryStage.setTitle("ABACUS");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
+        Controller controller = new Controller(args[0]);
+        controller.start();
+    }
 }

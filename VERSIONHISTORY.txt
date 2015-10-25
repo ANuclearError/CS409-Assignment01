@@ -29,3 +29,11 @@ v0.2 - 2015-10-23
 	- Created Controller class which influences the GUI.
 	- Created system for choosing folders.
 	- Created about window.
+
+v0.3 = 2015-10-25
+
+	- Complete overhaul of the project.
+	- Gotten rid of GUI, using text interface from now on.
+	- Currently have system continuously choosing new files.
+	- Created LargeClass smell, but do not currently generate ratings.
+	- Creating ratings enum for analysis to use.
