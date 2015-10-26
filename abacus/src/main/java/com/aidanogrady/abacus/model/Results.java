@@ -1,6 +1,8 @@
 package com.aidanogrady.abacus.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,7 +22,7 @@ public class Results {
     /**
      * Maps the name of each method to the number of lines it contains.
      */
-    private Map<String, Integer> methods;
+    private List<Method> methods;
 
     /**
      * The number of fields in a Java class.
@@ -38,17 +40,19 @@ public class Results {
     public Results () {
         noOfFields = 0;
         noOfMethods = 0;
-        methods = new HashMap<String, Integer>();
+        methods = new ArrayList<Method>();
     }
 
     /**
      * Adds a new method to the collection of methods, along with their length.
      * @param name - the name of the method.
      * @param length - the length of the method.
+     * @param params - the number of parameters method has.
      */
-    public void addMethod(String name, int length) {
-        methods.put(name, length);
+    public void addMethod(String name, int length, int params) {
+        methods.add(new Method(name, length, params));
     }
+
 
     /**
      * Returns the name of the class
@@ -62,7 +66,7 @@ public class Results {
      * Returns the map of methods to their length
      * @return methods
      */
-    public Map<String, Integer> getMethods() {
+    public List<Method> getMethods() {
         return methods;
     }
 

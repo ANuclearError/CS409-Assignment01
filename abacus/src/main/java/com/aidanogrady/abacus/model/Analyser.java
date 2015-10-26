@@ -59,6 +59,6 @@ public class Analyser extends VoidVisitorAdapter {
         int endLine = n.getEndLine();
         int length = endLine - startLine;
         results.incrementNoOfMethods();
-        results.addMethod(n.getName(), length);
+        results.addMethod(n.getName(), length, n.getParameters().size());
     }
 }

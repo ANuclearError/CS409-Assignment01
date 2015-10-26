@@ -55,3 +55,4 @@ v0.6 - 2015-10-26
     - Combined all the analysers into a single class, since I felt old way was
       too confusing.
     - Added results class to store all the results in.
+    - Added method class to store information on methods.

@@ -1,6 +1,7 @@
 package com.aidanogrady.abacus.controller;
 
 import com.aidanogrady.abacus.model.Analyser;
+import com.aidanogrady.abacus.model.Method;
 import com.aidanogrady.abacus.model.Model;
 import com.aidanogrady.abacus.model.Results;
 import com.aidanogrady.abacus.view.Input;
@@ -108,5 +109,11 @@ public class Controller {
         Output.print("Number of fields: " + results.getNoOfFields());
         Output.print("Number of methods: " + results.getNoOfMethods());
         Output.minorLineBreak();
+        for (Method method : results.getMethods()) {
+            Output.print("Method: " + method.getName());
+            Output.print("\tNumber of lines: " + method.getLines());
+            Output.print("\tNumber of parameters: " + method.getParameters());
+        }
+        Output.lineBreak();
     }
 }
