@@ -48,3 +48,10 @@ v0.5 - 2015-10-26
 
     - Added ICodeSmell to try and have some sort of interface to all these code
       smells.
+
+v0.6 - 2015-10-26
+
+    - Another rewrite, yay!
+    - Combined all the analysers into a single class, since I felt old way was
+      too confusing.
+    - Added results class to store all the results in.

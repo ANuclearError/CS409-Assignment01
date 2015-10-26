@@ -1,15 +1,10 @@
 package com.aidanogrady.abacus.model;
 
-import com.aidanogrady.abacus.model.bloaters.ICodeSmell;
-import com.aidanogrady.abacus.model.bloaters.LargeClass;
-import com.aidanogrady.abacus.model.bloaters.LargeMethods;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Model class runs all the analysis on a file given to it. It will
@@ -21,23 +16,15 @@ import java.util.List;
 public class Model {
 
     /**
-     * The analyser to obtain class names.
+     * The analyser to obtain information on classes.
      */
-    private ClassName className;
-
-    /**
-     * The analyser to determine large classes.
-     */
-    private List<ICodeSmell> smellList;
+    private Analyser analyser;
 
     /**
      * Constructor
      */
     public Model() {
-        className = new ClassName();
-        smellList = new ArrayList<ICodeSmell>();
-        smellList.add(new LargeClass());
-        smellList.add(new LargeMethods());
+        analyser = new Analyser();
     }
 
     /**
@@ -58,26 +45,11 @@ public class Model {
         }
 
         // visit and print the methods names
-        className.visit(cu, null);
-        for(ICodeSmell smell : smellList) {
-            smell.reset();
-            smell.analyse(cu);
-        }
+        analyser.reset();
+        analyser.visit(cu, null);
     }
 
-    /**
-     * Returns the className analyser
-     * @return className;
-     */
-    public ClassName getClassName() {
-        return className;
-    }
-
-    /**
-     * Returns list of all the code smells analysing.
-     * @return list of visitors
-     */
-    public List<ICodeSmell> getCodeSmells() {
-        return smellList;
+    public Results getResults() {
+        return analyser.getResults();
     }
 }

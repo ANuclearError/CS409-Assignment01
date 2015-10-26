@@ -1,7 +1,8 @@
 package com.aidanogrady.abacus.controller;
 
+import com.aidanogrady.abacus.model.Analyser;
 import com.aidanogrady.abacus.model.Model;
-import com.aidanogrady.abacus.model.bloaters.ICodeSmell;
+import com.aidanogrady.abacus.model.Results;
 import com.aidanogrady.abacus.view.Input;
 import com.aidanogrady.abacus.view.Output;
 import org.apache.commons.io.FileUtils;
@@ -70,7 +71,7 @@ public class Controller {
             File chosen = chooseFile();
             model.analyse(chosen);
             Output.lineBreak();
-            showResults();
+            showResults(model.getResults());
         }
     }
 
@@ -101,14 +102,11 @@ public class Controller {
     /**
      * Displays the result of analysis to the user.
      */
-    private void showResults() {
-        Output.print("Analysing: " + model.getClassName().getName());
+    private void showResults(Results results) {
+        Output.print("Class: " + results.getClassName());
         Output.minorLineBreak();
-        for(ICodeSmell smell : model.getCodeSmells()) {
-            Output.print(smell.getName());
-            Output.minorLineBreak();
-            Output.print(smell.getDetails());
-            Output.minorLineBreak();
-        }
+        Output.print("Number of fields: " + results.getNoOfFields());
+        Output.print("Number of methods: " + results.getNoOfMethods());
+        Output.minorLineBreak();
     }
 }
