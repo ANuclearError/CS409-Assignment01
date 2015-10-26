@@ -20,6 +20,16 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 public class LargeClass extends VoidVisitorAdapter {
 
     /**
+     * The maximum number of fields allowed before a bad rating is given.
+     */
+    private static final int MAX_FIELDS = 20;
+
+    /**
+     * The maximum number of methods allowed before a bad rating is given.
+     */
+    private static final int MAX_METHODS = 20;
+
+    /**
      * The number of fields in a Java class.
      */
     private int noOfFields;
@@ -38,14 +48,6 @@ public class LargeClass extends VoidVisitorAdapter {
     }
 
     /**
-     * Returns the rating of this code smell.
-     * @return rating
-     */
-    public Rating getRating() {
-        return Rating.GOOD;
-    }
-
-    /**
      * Returns the number of fields in this class.
      * @return number of fields
      */
@@ -59,6 +61,26 @@ public class LargeClass extends VoidVisitorAdapter {
      */
     public int getNoOfMethods() {
         return noOfMethods;
+    }
+
+    /**
+     * Returns the rating of this code smell.
+     * @return rating
+     */
+    public Rating getRating() {
+        if (noOfFields > MAX_FIELDS && noOfMethods > MAX_METHODS)
+            return Rating.BAD;
+        if (noOfFields > MAX_FIELDS || noOfMethods > MAX_METHODS)
+            return Rating.OKAY;
+        return Rating.GOOD;
+    }
+
+    /**
+     * Resets the counts for when a new class is visited.
+     */
+    public void reset() {
+        noOfFields = 0;
+        noOfMethods = 0;
     }
 
     @Override

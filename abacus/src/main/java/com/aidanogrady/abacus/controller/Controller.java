@@ -1,5 +1,7 @@
 package com.aidanogrady.abacus.controller;
 
+import com.aidanogrady.abacus.model.Model;
+import com.aidanogrady.abacus.model.bloaters.LargeClass;
 import com.aidanogrady.abacus.view.Input;
 import com.aidanogrady.abacus.view.Output;
 import org.apache.commons.io.FileUtils;
@@ -28,6 +30,11 @@ public class Controller {
     private List<File> files;
 
     /**
+     * The model that will analyse the code.
+     */
+    private Model model;
+
+    /**
      * Constructor
      *
      * @param path - the path of the source code's directory.
@@ -37,6 +44,7 @@ public class Controller {
         final String[] SUFFIX = {"java"};
         Collection<File> col = FileUtils.listFiles(directory, SUFFIX, true);
         files = new ArrayList<File>(col);
+        model = new Model();
     }
 
     /**
@@ -46,17 +54,23 @@ public class Controller {
         Output.print("You have chosen the directory:");
         Output.print(directory);
         Output.minorLineBreak();
-        loop();
+        try {
+            loop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * The main loop of the program, allowing the user to view different files
      * until they wish to quit the program.
      */
-    private void loop() {
-        while(true) {
-            System.out.println(chooseFile());
+    private void loop() throws Exception {
+        while (true) {
+            File chosen = chooseFile();
+            model.analyse(chosen);
             Output.minorLineBreak();
+            showResults();
         }
     }
 
@@ -80,5 +94,18 @@ public class Controller {
             Output.integerException(response + "");
             return chooseFile();
         }
+    }
+
+    /**
+     * Displays the result of analysis to the user.
+     */
+    private void showResults() {
+        Output.print("Analysing: " + model.getClassName().getName());
+        Output.minorLineBreak();
+        LargeClass largeClass = model.getLargeClass();
+        Output.print("Number of fields: " + largeClass.getNoOfFields());
+        Output.print("Number of methods: " + largeClass.getNoOfMethods());
+        Output.print("Rating: " + largeClass.getRating());
+        Output.minorLineBreak();
     }
 }

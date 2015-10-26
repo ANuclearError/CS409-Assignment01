@@ -12,29 +12,26 @@ import java.io.FileInputStream;
  * sequentially go through each code smell and analyze its given class.
  *
  * @author Aidan O'Grady
- * @since 1.0
+ * @since 0.3
  */
 public class Model {
 
     /**
-     * The file currently being analysed.
+     * The analyser to obtain class names.
      */
-    private File file;
+    private ClassName className;
 
     /**
-     * Returns the currently analysed file.
-     * @return file
+     * The analyser to determine large classes.
      */
-    public File getFile() {
-        return file;
-    }
+    private LargeClass largeClass;
 
     /**
-     * Sets a new file to be analysed.
-     * @param file - the new file to be analysed.
+     * Constructor
      */
-    public void setFile(File file) {
-        this.file = file;
+    public Model() {
+        className = new ClassName();
+        largeClass = new LargeClass();
     }
 
     /**
@@ -42,7 +39,7 @@ public class Model {
      *
      * @throws Exception - something has gone wrong.
      */
-    public void analyse() throws Exception {
+    public void analyse(File file) throws Exception {
         // creates an input stream for the file to be parsed
         FileInputStream in = new FileInputStream(file);
 
@@ -55,7 +52,24 @@ public class Model {
         }
 
         // visit and print the methods names
-        LargeClass largeClass = new LargeClass();
+        className.visit(cu, null);
+        largeClass.reset();
         largeClass.visit(cu, null);
+    }
+
+    /**
+     * Returns the className analyser
+     * @return className;
+     */
+    public ClassName getClassName() {
+        return className;
+    }
+
+    /**
+     * Returns the largeClass analyser
+     * @return largeClass;
+     */
+    public LargeClass getLargeClass() {
+        return largeClass;
     }
 }
