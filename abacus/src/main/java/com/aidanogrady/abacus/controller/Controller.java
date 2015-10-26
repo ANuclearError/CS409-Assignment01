@@ -1,6 +1,7 @@
 package com.aidanogrady.abacus.controller;
 
 import com.aidanogrady.abacus.model.Model;
+import com.aidanogrady.abacus.model.bloaters.ICodeSmell;
 import com.aidanogrady.abacus.model.bloaters.LargeClass;
 import com.aidanogrady.abacus.view.Input;
 import com.aidanogrady.abacus.view.Output;
@@ -69,7 +70,7 @@ public class Controller {
         while (true) {
             File chosen = chooseFile();
             model.analyse(chosen);
-            Output.minorLineBreak();
+            Output.lineBreak();
             showResults();
         }
     }
@@ -89,8 +90,10 @@ public class Controller {
             response = Input.getInteger();
             return files.get(response - 1);
         } catch(IndexOutOfBoundsException e) {
-            if(response == 0)
+            if (response == 0) {
+                Output.print("Goodbye.");
                 System.exit(0);
+            }
             Output.integerException(response + "");
             return chooseFile();
         }
@@ -102,10 +105,10 @@ public class Controller {
     private void showResults() {
         Output.print("Analysing: " + model.getClassName().getName());
         Output.minorLineBreak();
-        LargeClass largeClass = model.getLargeClass();
-        Output.print("Number of fields: " + largeClass.getNoOfFields());
-        Output.print("Number of methods: " + largeClass.getNoOfMethods());
-        Output.print("Rating: " + largeClass.getRating());
+        for(ICodeSmell smell : model.getCodeSmells()) {
+            Output.print(smell.getName() + " rating: " + smell.getRating());
+            Output.print(smell.getRatingDetails());
+        }
         Output.minorLineBreak();
     }
 }

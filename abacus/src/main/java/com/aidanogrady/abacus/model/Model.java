@@ -1,11 +1,14 @@
 package com.aidanogrady.abacus.model;
 
+import com.aidanogrady.abacus.model.bloaters.ICodeSmell;
 import com.aidanogrady.abacus.model.bloaters.LargeClass;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Model class runs all the analysis on a file given to it. It will
@@ -24,14 +27,15 @@ public class Model {
     /**
      * The analyser to determine large classes.
      */
-    private LargeClass largeClass;
+    private List<ICodeSmell> smellList;
 
     /**
      * Constructor
      */
     public Model() {
         className = new ClassName();
-        largeClass = new LargeClass();
+        smellList = new ArrayList<ICodeSmell>();
+        smellList.add(new LargeClass());
     }
 
     /**
@@ -53,8 +57,10 @@ public class Model {
 
         // visit and print the methods names
         className.visit(cu, null);
-        largeClass.reset();
-        largeClass.visit(cu, null);
+        for(ICodeSmell smell : smellList) {
+            smell.reset();
+            smell.analyse(cu);
+        }
     }
 
     /**
@@ -66,10 +72,10 @@ public class Model {
     }
 
     /**
-     * Returns the largeClass analyser
-     * @return largeClass;
+     * Returns list of all the code smells analysing.
+     * @return list of visitors
      */
-    public LargeClass getLargeClass() {
-        return largeClass;
+    public List<ICodeSmell> getCodeSmells() {
+        return smellList;
     }
 }

@@ -1,6 +1,7 @@
 package com.aidanogrady.abacus.model.bloaters;
 
 import com.aidanogrady.abacus.model.Rating;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -15,9 +16,9 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
  * methods as possible.
  *
  * @author Aidan O'Grady
- * @since 1.0
+ * @since 0.3
  */
-public class LargeClass extends VoidVisitorAdapter {
+public class LargeClass extends VoidVisitorAdapter implements ICodeSmell{
 
     /**
      * The maximum number of fields allowed before a bad rating is given.
@@ -47,26 +48,14 @@ public class LargeClass extends VoidVisitorAdapter {
         noOfMethods = 0;
     }
 
-    /**
-     * Returns the number of fields in this class.
-     * @return number of fields
-     */
-    public int getNoOfFields() {
-        return noOfFields;
+    public void analyse(CompilationUnit cu) {
+        visit(cu, null);
     }
 
-    /**
-     * Returns the number of methods in this class.
-     * @return number of methods.
-     */
-    public int getNoOfMethods() {
-        return noOfMethods;
+    public String getName() {
+        return "Large Classes";
     }
 
-    /**
-     * Returns the rating of this code smell.
-     * @return rating
-     */
     public Rating getRating() {
         if (noOfFields > MAX_FIELDS && noOfMethods > MAX_METHODS)
             return Rating.BAD;
@@ -75,9 +64,13 @@ public class LargeClass extends VoidVisitorAdapter {
         return Rating.GOOD;
     }
 
-    /**
-     * Resets the counts for when a new class is visited.
-     */
+    public String getRatingDetails() {
+        String detail = "";
+        detail += "No. of fields: " + noOfFields + " / " + MAX_FIELDS + "\n";
+        detail += "No. of methods: " + noOfMethods + " / " + MAX_METHODS;
+        return detail;
+    }
+
     public void reset() {
         noOfFields = 0;
         noOfMethods = 0;

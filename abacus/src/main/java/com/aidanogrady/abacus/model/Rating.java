@@ -11,7 +11,7 @@ package com.aidanogrady.abacus.model;
  * </ul>
  *
  * @author Aidan O'Grady
- * @since 1.0
+ * @since 0.3
  */
 public enum  Rating {
     /**
