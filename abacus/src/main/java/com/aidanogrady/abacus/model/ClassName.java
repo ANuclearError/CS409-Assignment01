@@ -10,6 +10,9 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
  * @since 0.4
  */
 public class ClassName extends VoidVisitorAdapter {
+	/**
+	 * The name of the class being analysed.
+	 */
 	private String name;
 
 	@Override
@@ -17,6 +20,11 @@ public class ClassName extends VoidVisitorAdapter {
 		name = n.getName();
 	}
 
+	/**
+	 * The name of the class being analysed.
+	 *
+	 * @return name
+	 */
 	public String getName() {
 		return name;
 	}
