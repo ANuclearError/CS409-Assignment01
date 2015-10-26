@@ -2,6 +2,7 @@ package com.aidanogrady.abacus.model;
 
 import com.aidanogrady.abacus.model.bloaters.ICodeSmell;
 import com.aidanogrady.abacus.model.bloaters.LargeClass;
+import com.aidanogrady.abacus.model.bloaters.LargeMethods;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 
@@ -36,6 +37,7 @@ public class Model {
         className = new ClassName();
         smellList = new ArrayList<ICodeSmell>();
         smellList.add(new LargeClass());
+        smellList.add(new LargeMethods());
     }
 
     /**

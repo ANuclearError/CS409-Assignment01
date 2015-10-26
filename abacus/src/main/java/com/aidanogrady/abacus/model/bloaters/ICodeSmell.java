@@ -1,6 +1,5 @@
 package com.aidanogrady.abacus.model.bloaters;
 
-import com.aidanogrady.abacus.model.Rating;
 import com.github.javaparser.ast.CompilationUnit;
 
 /**
@@ -23,16 +22,10 @@ public interface ICodeSmell {
 	String getName();
 
 	/**
-	 * Returns the rating of this code smell.
-	 * @return rating
-	 */
-	Rating getRating();
-
-	/**
 	 * Returns string of detailed results of analysis.
 	 * @return
 	 */
-	String getRatingDetails();
+	String getDetails();
 
 	/**
 	 * Resets the counts for when a new class is visited.

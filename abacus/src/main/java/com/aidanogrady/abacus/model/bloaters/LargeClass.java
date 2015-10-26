@@ -1,6 +1,5 @@
 package com.aidanogrady.abacus.model.bloaters;
 
-import com.aidanogrady.abacus.model.Rating;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
@@ -19,16 +18,6 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
  * @since 0.3
  */
 public class LargeClass extends VoidVisitorAdapter implements ICodeSmell{
-
-    /**
-     * The maximum number of fields allowed before a bad rating is given.
-     */
-    private static final int MAX_FIELDS = 20;
-
-    /**
-     * The maximum number of methods allowed before a bad rating is given.
-     */
-    private static final int MAX_METHODS = 20;
 
     /**
      * The number of fields in a Java class.
@@ -56,18 +45,10 @@ public class LargeClass extends VoidVisitorAdapter implements ICodeSmell{
         return "Large Classes";
     }
 
-    public Rating getRating() {
-        if (noOfFields > MAX_FIELDS && noOfMethods > MAX_METHODS)
-            return Rating.BAD;
-        if (noOfFields > MAX_FIELDS || noOfMethods > MAX_METHODS)
-            return Rating.OKAY;
-        return Rating.GOOD;
-    }
-
-    public String getRatingDetails() {
+    public String getDetails() {
         String detail = "";
-        detail += "No. of fields: " + noOfFields + " / " + MAX_FIELDS + "\n";
-        detail += "No. of methods: " + noOfMethods + " / " + MAX_METHODS;
+        detail += "No. of fields: " + noOfFields + "\n";
+        detail += "No. of methods: " + noOfMethods;
         return detail;
     }
 

@@ -2,7 +2,6 @@ package com.aidanogrady.abacus.controller;
 
 import com.aidanogrady.abacus.model.Model;
 import com.aidanogrady.abacus.model.bloaters.ICodeSmell;
-import com.aidanogrady.abacus.model.bloaters.LargeClass;
 import com.aidanogrady.abacus.view.Input;
 import com.aidanogrady.abacus.view.Output;
 import org.apache.commons.io.FileUtils;
@@ -106,9 +105,10 @@ public class Controller {
         Output.print("Analysing: " + model.getClassName().getName());
         Output.minorLineBreak();
         for(ICodeSmell smell : model.getCodeSmells()) {
-            Output.print(smell.getName() + " rating: " + smell.getRating());
-            Output.print(smell.getRatingDetails());
+            Output.print(smell.getName());
+            Output.minorLineBreak();
+            Output.print(smell.getDetails());
+            Output.minorLineBreak();
         }
-        Output.minorLineBreak();
     }
 }
