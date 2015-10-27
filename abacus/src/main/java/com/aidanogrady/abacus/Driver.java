@@ -1,6 +1,5 @@
 package com.aidanogrady.abacus;
 
-
 import com.aidanogrady.abacus.controller.Controller;
 import com.aidanogrady.abacus.view.Output;
 
@@ -15,7 +14,7 @@ public class Driver {
 
     private static final String ACRONYM = "ABACUS";
 
-    private static final String VERSION = "v0.2";
+    private static final String VERSION = "v0.6";
 
     private static final String NAME =
             "A Benevolent Analysis of Codes' Unsavoury Smells";
@@ -29,7 +28,7 @@ public class Driver {
 	 */
 	public static void main(String[] args) {
         if (args.length == 0) {
-            System.out.println("USAGE: ABACUS.jar directory");
+            System.out.println("USAGE: ABACUS.jar <directory>");
             System.exit(0);
         }
 

@@ -1,9 +1,6 @@
 package com.aidanogrady.abacus.controller;
 
-import com.aidanogrady.abacus.model.Analyser;
-import com.aidanogrady.abacus.model.Method;
-import com.aidanogrady.abacus.model.Model;
-import com.aidanogrady.abacus.model.Results;
+import com.aidanogrady.abacus.model.*;
 import com.aidanogrady.abacus.view.Input;
 import com.aidanogrady.abacus.view.Output;
 import org.apache.commons.io.FileUtils;
@@ -104,16 +101,42 @@ public class Controller {
      * Displays the result of analysis to the user.
      */
     private void showResults(Results results) {
-        Output.print("Class: " + results.getClassName());
+        Rating rating;
+        String name = results.getClassName();
+        int fields = results.getNoOfFields();
+        int methods = results.getNoOfMethods();
+
+        Output.print("Class: " + name);
         Output.minorLineBreak();
-        Output.print("Number of fields: " + results.getNoOfFields());
-        Output.print("Number of methods: " + results.getNoOfMethods());
+
+        Output.print("Number of fields: " + fields);
+        Output.print("Number of methods: " + methods);
+        rating = Ratings.getClassRating(fields, methods);
+        Output.print("Large Classing Rating: " + rating);
+
         Output.minorLineBreak();
-        for (Method method : results.getMethods()) {
-            Output.print("Method: " + method.getName());
-            Output.print("\tNumber of lines: " + method.getLines());
-            Output.print("\tNumber of parameters: " + method.getParameters());
-        }
+        showMethodResults(results.getMethods());
         Output.lineBreak();
+    }
+
+    /**
+     * Shows the results for each method.
+     * @param methods - the methods analysed.
+     */
+    private void showMethodResults(List<Method> methods) {
+        Rating rating;
+        String name;
+        int lines;
+        int params;
+        for (Method method : methods) {
+            name = method.getName();
+            lines = method.getLines();
+            params = method.getParameters();
+            Output.print("Method: " + name);
+            rating = Ratings.getMethodLinesRating(lines);
+            Output.print("\tNumber of lines: " + lines + " " + rating);
+            rating = Ratings.getParametersRating(params);
+            Output.print("\tNumber of parameters: " + params + " " + rating);
+        }
     }
 }

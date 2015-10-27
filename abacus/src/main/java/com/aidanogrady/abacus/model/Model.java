@@ -49,6 +49,10 @@ public class Model {
         analyser.visit(cu, null);
     }
 
+    /**
+     * Returns results of this analysis.
+     * @return results
+     */
     public Results getResults() {
         return analyser.getResults();
     }

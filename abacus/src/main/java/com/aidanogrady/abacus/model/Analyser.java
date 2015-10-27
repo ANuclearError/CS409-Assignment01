@@ -29,7 +29,7 @@ public class Analyser extends VoidVisitorAdapter {
 
     /**
      * Returns results of this analysis.
-     * @return
+     * @return results
      */
     protected Results getResults() {
         return results;
