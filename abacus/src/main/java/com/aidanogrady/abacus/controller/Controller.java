@@ -99,6 +99,7 @@ public class Controller {
 
     /**
      * Displays the result of analysis to the user.
+     * @param results - the results to be displayed
      */
     private void showResults(Results results) {
         Rating rating;
