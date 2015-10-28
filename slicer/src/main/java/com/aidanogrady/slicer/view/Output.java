@@ -124,8 +124,9 @@ public class Output {
     }
 
     public static <T> void printList(List<T> list) {
-        for(T item : list){
-            Output.print("\t" + item);
+        for(int i = 0; i < list.size(); i++){
+            T item = list.get(i);
+            Output.print("\t" + (i+1) + ". " + item);
         }
     }
 }

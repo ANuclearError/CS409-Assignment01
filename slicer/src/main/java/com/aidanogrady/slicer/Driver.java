@@ -1,5 +1,6 @@
 package com.aidanogrady.slicer;
 
+import com.aidanogrady.slicer.controller.Controller;
 import com.aidanogrady.slicer.view.Output;
 
 /**
@@ -13,7 +14,7 @@ public class Driver {
 
     private static final String ACRONYM = "SLICER";
 
-    private static final String VERSION = "v0.0";
+    private static final String VERSION = "v0.1";
 
     private static final String NAME =
             "Slicing Lines of Interesting Code Extremely Roughly";
@@ -36,5 +37,8 @@ public class Driver {
         Output.print(NAME);
         Output.print(AUTHOR);
         Output.lineBreak();
+
+        Controller controller = new Controller(args[0]);
+        controller.start();
     }
 }
