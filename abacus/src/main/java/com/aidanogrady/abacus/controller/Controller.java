@@ -115,8 +115,27 @@ public class Controller {
         Output.print("Large Classing Rating: " + rating);
 
         Output.minorLineBreak();
+        showConstructorResults(results.getConstructors());
+        Output.minorLineBreak();
         showMethodResults(results.getMethods());
         Output.lineBreak();
+    }
+
+    /**
+     * Shows the results for each constructor.
+     * @param constructors - the constructors analysed.
+     */
+    private void showConstructorResults(List<Constructor> constructors) {
+        Rating rating;
+        int params;
+        Output.print("Constructors");
+        Output.minorLineBreak();
+        for (Constructor c : constructors) {
+            params = c.getNoOfParameters();
+            rating = Ratings.getParametersRating(params);
+            Output.print("Parameters: " + c.getParameters().toString());
+            Output.print("No of Parameters: " + params + " " + rating);
+        }
     }
 
     /**

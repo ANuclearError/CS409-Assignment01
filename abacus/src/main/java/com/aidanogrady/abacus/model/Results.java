@@ -1,9 +1,8 @@
 package com.aidanogrady.abacus.model;
 
+import com.github.javaparser.ast.body.Parameter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * The results class contains all the results of the smell. It contains each of
@@ -18,6 +17,11 @@ public class Results {
      * The name of the class being analysed.
      */
     private String className;
+
+    /**
+     * List of all constructors in a class.
+     */
+    private List<Constructor> constructors;
 
     /**
      * Maps the name of each method to the number of lines it contains.
@@ -40,7 +44,12 @@ public class Results {
     public Results () {
         noOfFields = 0;
         noOfMethods = 0;
+        constructors = new ArrayList<Constructor>();
         methods = new ArrayList<Method>();
+    }
+
+    public void addConstructor(List<Parameter> parameters) {
+        constructors.add(new Constructor(parameters));
     }
 
     /**
@@ -53,7 +62,6 @@ public class Results {
         methods.add(new Method(name, length, params));
     }
 
-
     /**
      * Returns the name of the class
      * @return class name.
@@ -63,7 +71,14 @@ public class Results {
     }
 
     /**
-     * Returns the map of methods to their length
+     * Returns list of constructors
+     * @return constructors
+     */
+    public List<Constructor> getConstructors() {
+        return constructors;
+    }
+    /**
+     * Returns the list of methods
      * @return methods
      */
     public List<Method> getMethods() {

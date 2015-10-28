@@ -1,6 +1,7 @@
 package com.aidanogrady.abacus.model;
 
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -51,6 +52,11 @@ public class Analyser extends VoidVisitorAdapter {
     @Override
     public void visit(FieldDeclaration n, Object arg) {
         results.incrementNoOfFields();
+    }
+
+    @Override
+    public void visit(ConstructorDeclaration n, Object arg) {
+        results.addConstructor(n.getParameters());
     }
 
     @Override
