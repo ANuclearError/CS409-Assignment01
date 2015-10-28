@@ -64,7 +64,14 @@ public class Analyser extends VoidVisitorAdapter {
         int startLine = n.getBeginLine();
         int endLine = n.getEndLine();
         int length = endLine - startLine;
+        String name = n.getName();
         results.incrementNoOfMethods();
-        results.addMethod(n.getName(), length, n.getParameters().size());
+        results.addMethod(name, length, n.getParameters().size());
+
+        // Since we have a method that isn't a getter/setter, we probably don't
+        // have a data class. Could maybe be more sophisticated.
+        if(!name.startsWith("get") && !name.startsWith("set")) {
+            results.setIsDataClass(false);
+        }
     }
 }

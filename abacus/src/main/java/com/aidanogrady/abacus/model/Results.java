@@ -23,6 +23,8 @@ public class Results {
      */
     private List<Constructor> constructors;
 
+    private boolean isDataClass;
+
     /**
      * Maps the name of each method to the number of lines it contains.
      */
@@ -46,6 +48,7 @@ public class Results {
         noOfMethods = 0;
         constructors = new ArrayList<Constructor>();
         methods = new ArrayList<Method>();
+        isDataClass = true;
     }
 
     public void addConstructor(List<Parameter> parameters) {
@@ -77,6 +80,15 @@ public class Results {
     public List<Constructor> getConstructors() {
         return constructors;
     }
+
+    /**
+     * Returns whether class is data class or not.
+     * @return is data class
+     */
+    public boolean getIsDataClass() {
+        return isDataClass;
+    }
+
     /**
      * Returns the list of methods
      * @return methods
@@ -121,5 +133,13 @@ public class Results {
      */
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    /**
+     * Sets whether or not class is a data class.
+     * @param isDataClass - is the class a data class?
+     */
+    public void setIsDataClass(boolean isDataClass) {
+        this.isDataClass = isDataClass;
     }
 }

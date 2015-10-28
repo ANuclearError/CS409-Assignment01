@@ -110,6 +110,11 @@ public class Controller {
         Output.print("Class: " + name);
         Output.minorLineBreak();
 
+        if (results.getIsDataClass()) {
+            Output.print("Class only has getters and setter methods");
+            Output.print("I'd maybe re-factor this.\n");
+        }
+
         rating = Ratings.getClassRating(fields, methods);
         if (!rating.equals(Rating.GOOD)) {
             Output.print(rating + " WARNING!");
