@@ -7,22 +7,7 @@ package com.aidanogrady.abacus.model;
  * needs to be the case). A bad rating means "CHANGE NOW!".
  */
 public enum Rating {
-    GOOD {
-        @Override
-        public String toString() {
-            return "Good";
-        }
-    },
-    BAD {
-        @Override
-        public String toString() {
-            return "Bad";
-        }
-    },
-    DODGY {
-        @Override
-        public String toString() {
-            return "Okay";
-        }
-    }
+    GOOD,
+    BAD,
+    DODGY
 }

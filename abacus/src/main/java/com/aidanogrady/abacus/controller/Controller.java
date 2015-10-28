@@ -111,15 +111,15 @@ public class Controller {
 
         rating = Ratings.getClassRating(fields, methods);
         if (!rating.equals(Rating.GOOD)) {
-            Output.print(rating + "WARNING!");
+            Output.print(rating + " WARNING!");
             Output.print("\t" + fields + " fields");
             Output.print("\t" + methods + " methods");
-            Output.minorLineBreak();
+            Output.lineBreak();
         }
 
         if(!results.getConstructors().isEmpty()) {
             showConstructorResults(results.getConstructors());
-            Output.minorLineBreak();
+            Output.lineBreak();
         }
         showMethodResults(results.getMethods());
         Output.lineBreak();
@@ -140,7 +140,7 @@ public class Controller {
                 Output.print("Parameters: " + c.getParameters().toString());
                 rating = Ratings.getParametersRating(params);
                 if (!rating.equals(Rating.GOOD)) {
-                    Output.print(rating + "WARNING: " + params + " parameters");
+                    Output.print(rating + " WARNING: " + params + " params");
                 }
             } else {
                 Output.print("No parameters");
@@ -164,11 +164,11 @@ public class Controller {
             Output.print("Method: " + name);
             rating = Ratings.getMethodLinesRating(lines);
             if (!rating.equals(Rating.GOOD)) {
-                Output.print(rating + "WARNING: " + lines + " lines");
+                Output.print("\t" + rating + " WARNING: " + lines + " lines");
             }
             rating = Ratings.getParametersRating(params);
             if (!rating.equals(Rating.GOOD)) {
-                Output.print(rating + "WARNING: " + params + " parameters");
+                Output.print("\t" + rating + " WARNING: " + params + " params");
             }
         }
     }
