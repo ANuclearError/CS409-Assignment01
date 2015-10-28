@@ -109,14 +109,18 @@ public class Controller {
         Output.print("Class: " + name);
         Output.minorLineBreak();
 
-        Output.print("Number of fields: " + fields);
-        Output.print("Number of methods: " + methods);
         rating = Ratings.getClassRating(fields, methods);
-        Output.print("Large Classing Rating: " + rating);
+        if (!rating.equals(Rating.GOOD)) {
+            Output.print(rating + "WARNING!");
+            Output.print("\t" + fields + " fields");
+            Output.print("\t" + methods + " methods");
+            Output.minorLineBreak();
+        }
 
-        Output.minorLineBreak();
-        showConstructorResults(results.getConstructors());
-        Output.minorLineBreak();
+        if(!results.getConstructors().isEmpty()) {
+            showConstructorResults(results.getConstructors());
+            Output.minorLineBreak();
+        }
         showMethodResults(results.getMethods());
         Output.lineBreak();
     }
@@ -132,9 +136,15 @@ public class Controller {
         Output.minorLineBreak();
         for (Constructor c : constructors) {
             params = c.getNoOfParameters();
-            rating = Ratings.getParametersRating(params);
-            Output.print("Parameters: " + c.getParameters().toString());
-            Output.print("No of Parameters: " + params + " " + rating);
+            if (params > 0) {
+                Output.print("Parameters: " + c.getParameters().toString());
+                rating = Ratings.getParametersRating(params);
+                if (!rating.equals(Rating.GOOD)) {
+                    Output.print(rating + "WARNING: " + params + " parameters");
+                }
+            } else {
+                Output.print("No parameters");
+            }
         }
     }
 
@@ -153,9 +163,13 @@ public class Controller {
             params = method.getParameters();
             Output.print("Method: " + name);
             rating = Ratings.getMethodLinesRating(lines);
-            Output.print("\tNumber of lines: " + lines + " " + rating);
+            if (!rating.equals(Rating.GOOD)) {
+                Output.print(rating + "WARNING: " + lines + " lines");
+            }
             rating = Ratings.getParametersRating(params);
-            Output.print("\tNumber of parameters: " + params + " " + rating);
+            if (!rating.equals(Rating.GOOD)) {
+                Output.print(rating + "WARNING: " + params + " parameters");
+            }
         }
     }
 }
