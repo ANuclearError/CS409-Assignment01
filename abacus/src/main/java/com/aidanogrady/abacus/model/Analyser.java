@@ -51,7 +51,7 @@ public class Analyser extends VoidVisitorAdapter {
 
     @Override
     public void visit(FieldDeclaration n, Object arg) {
-        results.incrementNoOfFields();
+        results.addField(n.getVariables().toString(), n.getType());
     }
 
     @Override
@@ -65,7 +65,6 @@ public class Analyser extends VoidVisitorAdapter {
         int endLine = n.getEndLine();
         int length = endLine - startLine;
         String name = n.getName();
-        results.incrementNoOfMethods();
         results.addMethod(name, length, n.getParameters().size());
 
         // Since we have a method that isn't a getter/setter, we probably don't

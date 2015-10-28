@@ -1,6 +1,8 @@
 package com.aidanogrady.abacus.model;
 
 import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.type.Type;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,11 @@ public class Results {
      * The name of the class being analysed.
      */
     private String className;
+
+    /**
+     * List of all fields in a class.
+     */
+    private List<Field> fields;
 
     /**
      * List of all constructors in a class.
@@ -46,11 +53,26 @@ public class Results {
     public Results () {
         noOfFields = 0;
         noOfMethods = 0;
+        fields = new ArrayList<Field>();
         constructors = new ArrayList<Constructor>();
         methods = new ArrayList<Method>();
         isDataClass = true;
     }
 
+    /**
+     * Adds a new field to the collection of fields.
+     * @param name - the name of the field.
+     * @param type - the type of the field
+     */
+    public void addField(String name, Type type) {
+        fields.add(new Field(name, type));
+    }
+
+
+    /**
+     * Adds new constructor to collection of them.
+     * @param parameters - the parameters of this new method.
+     */
     public void addConstructor(List<Parameter> parameters) {
         constructors.add(new Constructor(parameters));
     }
@@ -90,6 +112,13 @@ public class Results {
     }
 
     /**
+     * Returns classes' list of fields.
+     * @return
+     */
+    public List<Field> getFields() {
+        return fields;
+    }
+    /**
      * Returns the list of methods
      * @return methods
      */
@@ -102,7 +131,7 @@ public class Results {
      * @return number of fields.
      */
     public int getNoOfFields() {
-        return noOfFields;
+        return fields.size();
     }
 
     /**
@@ -110,21 +139,7 @@ public class Results {
      * @return number of methods.
      */
     public int getNoOfMethods() {
-        return noOfMethods;
-    }
-
-    /**
-     * Increments the number of fields in class by one.
-     */
-    public void incrementNoOfFields() {
-        noOfFields++;
-    }
-
-    /**
-     * Increments the number of methods in class by one.
-     */
-    public void incrementNoOfMethods() {
-        noOfMethods++;
+        return methods.size();
     }
 
     /**

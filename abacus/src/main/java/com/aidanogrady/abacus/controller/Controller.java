@@ -108,7 +108,7 @@ public class Controller {
         int methods = results.getNoOfMethods();
 
         Output.print("Class: " + name);
-        Output.minorLineBreak();
+        Output.lineBreak();
 
         if (results.getIsDataClass()) {
             Output.print("Class only has getters and setter methods");
@@ -123,12 +123,35 @@ public class Controller {
             Output.lineBreak();
         }
 
+        if(!results.getFields().isEmpty()) {
+            showFieldResults(results.getFields());
+            Output.lineBreak();
+        }
+
         if(!results.getConstructors().isEmpty()) {
             showConstructorResults(results.getConstructors());
             Output.lineBreak();
         }
+
         showMethodResults(results.getMethods());
         Output.lineBreak();
+    }
+
+    private void showFieldResults(List<Field> fields) {
+        int prims = 0;
+        Output.print("Fields");
+        Output.minorLineBreak();
+        for (Field f : fields) {
+            if(f.isPrimitive()) {
+                prims++;
+                Output.print(f.getName() + " is primitive.");
+                Output.print("\t Might wanna look into this.");
+            }
+        }
+
+        if (prims > (fields.size() / 2)) {
+            Output.print("Over half are primitive, maybe obsessed?");
+        }
     }
 
     /**
