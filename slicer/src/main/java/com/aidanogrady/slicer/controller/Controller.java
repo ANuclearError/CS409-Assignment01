@@ -1,5 +1,6 @@
 package com.aidanogrady.slicer.controller;
 
+import com.aidanogrady.slicer.model.ClassInfo;
 import com.aidanogrady.slicer.view.Input;
 import com.aidanogrady.slicer.view.Output;
 import org.apache.commons.io.FileUtils;
@@ -58,9 +59,23 @@ public class Controller {
      * until they wish to quit the program.
      */
     private void loop() throws Exception {
+        ClassInfo info = new ClassInfo();;
+        File chosen;
+        int lineNo;
+
+        String name;
+        int start;
+        int end;
         while (true) {
-            File chosen = chooseFile();
-            Output.print(chosen);
+            chosen = chooseFile();
+            info.analyse(chosen);
+            name = info.getClassName();
+            start = info.getStartLine();
+            end = info.getEndLine();
+            Output.print("Slicing class: " + name);
+            Output.print("Line: (" + start + "-" + end + "): ");
+            lineNo = Input.getInteger();
+            Output.print("Slicing " + name + " from line " + lineNo);
             Output.lineBreak();
         }
     }

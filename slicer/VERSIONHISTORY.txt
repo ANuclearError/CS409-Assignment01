@@ -18,3 +18,4 @@ v0.0 - 2015-10-28
 v0.1 - 2015-10-28
 
     - Added Controller class which handles loop of file choosing currently.
+    - Added ClassInfo class which visits AST to get class information (basic).
