@@ -1,0 +1,16 @@
+CS409-ASSIGNMENT01 VERSION HISTORY
+
+================================================================================
+
+Version 0 : Initial Setup
+Commenced : 2015-10-28
+Finished  : -
+
+--------------------------------------------------------------------------------
+
+v0.0 - 2015-10-28
+
+    - An interesting turn of events in which I decide "screw it", lets try code
+    slicing on the less than 48 hours before the deadline.
+    - Added the Driver class and the View classes to this new system, will be
+    interesting to see how it goes.
