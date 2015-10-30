@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.aidanogrady</groupId>
-    <artifactId>project-abacus</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>abacus</artifactId>
+    <version>1.0</version>
 
     <dependencies>
         <dependency>
@@ -20,5 +20,4 @@
             <version>1.3.2</version>
         </dependency>
     </dependencies>
-
 </project>
