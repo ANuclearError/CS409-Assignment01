@@ -110,9 +110,11 @@ public class Controller {
         Output.print("Class: " + name);
         Output.lineBreak();
 
+        // Data classes only contain getters and setters, does not actually
+        // do any operations
         if (results.getIsDataClass()) {
             Output.print("Class only has getters and setter methods");
-            Output.print("I'd maybe re-factor this.\n");
+            Output.print("I'd maybe look into this.\n");
         }
 
         rating = Ratings.getClassRating(fields, methods);
