@@ -186,11 +186,13 @@ public class Controller {
         String name;
         int lines;
         int params;
+        Output.print("Methods");
+        Output.minorLineBreak();
         for (Method method : methods) {
             name = method.getName();
             lines = method.getLines();
             params = method.getParameters();
-            Output.print("Method: " + name);
+            Output.print(name);
             rating = Ratings.getMethodLinesRating(lines);
             if (!rating.equals(Rating.GOOD)) {
                 Output.print("\t" + rating + " WARNING: " + lines + " lines");
