@@ -4,6 +4,7 @@ import com.aidanogrady.abacus.model.*;
 import com.aidanogrady.abacus.view.Input;
 import com.aidanogrady.abacus.view.Output;
 import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.type.Type;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -104,13 +105,11 @@ public class Controller {
      * @param results - the results to be displayed
      */
     private void showResults(Results results) {
-        Rating rating;
         String name = results.getClassName();
         int fields = results.getNoOfFields();
         int methods = results.getNoOfMethods();
 
         Output.print("Class: " + name);
-        Output.lineBreak();
 
         // Data classes only contain getters and setters, does not actually
         // do any operations
@@ -119,21 +118,13 @@ public class Controller {
             Output.print("I'd maybe look into this.\n");
         }
 
-        List<Set<Parameter>> dataClumps = results.getDataClumps();
-        if (!dataClumps.isEmpty()) {
-            Output.print("The following data clumps were detected");
-            for (Set<Parameter> dataClump : dataClumps) {
-                Output.print("\t" + dataClump);
-            }
+        Rating fRating = Ratings.getClassFieldsRating(fields);
+        Rating mRating = Ratings.getClassMethodsRating(methods);
+        if (!fRating.equals(Rating.GOOD) || !mRating.equals(Rating.GOOD)) {
+            Output.print("\t" + fRating + " WARNING: " + fields + " fields");
+            Output.print("\t" + mRating + " WARNING: " + fields + " methods");
         }
-
-        rating = Ratings.getClassRating(fields, methods);
-        if (!rating.equals(Rating.GOOD)) {
-            Output.print(rating + " WARNING!");
-            Output.print("\t" + fields + " fields");
-            Output.print("\t" + methods + " methods");
-            Output.lineBreak();
-        }
+        Output.lineBreak();
 
         if(!results.getFields().isEmpty()) {
             showFieldResults(results.getFields());
@@ -147,23 +138,44 @@ public class Controller {
 
         showMethodResults(results.getMethods());
         Output.lineBreak();
+
+        List<Set<Parameter>> dataClumps = results.getDataClumps();
+        if (!dataClumps.isEmpty()) {
+            Output.print("The following possible data clumps were detected");
+            for (Set<Parameter> dataClump : dataClumps) {
+                Output.print("\t" + dataClump);
+            }
+            Output.lineBreak();
+        }
     }
 
     private void showFieldResults(List<Field> fields) {
-        int prims = 0;
         Output.print("Fields");
         Output.minorLineBreak();
-        for (Field f : fields) {
-            if(f.isPrimitive()) {
-                prims++;
-                Output.print(f.getName() + " is primitive.");
-                Output.print("\t Might wanna look into this.");
+        boolean warning = false;
+
+        if (!fields.isEmpty()) {
+            for (Field f : fields) {
+                int prims = 0;
+                if (f.isPrimitive()) {
+                    prims++;
+                    String name = f.getName();
+                    Type type = f.getType();
+                    Output.print("Primitive" + name + "(" + type + ")");
+                    Output.print("\t Might wanna look into this.");
+                    warning = true;
+                }
+                if (prims > (fields.size() / 2)) {
+                    Output.print("Over half are primitive, maybe obsessed?");
+                }
             }
         }
 
-        if (prims > (fields.size() / 2)) {
-            Output.print("Over half are primitive, maybe obsessed?");
+        // No smells detected
+        if (!warning) {
+            Output.print("No problems here.");
         }
+
     }
 
     /**
@@ -171,21 +183,29 @@ public class Controller {
      * @param constructors - the constructors analysed.
      */
     private void showConstructorResults(List<Constructor> constructors) {
-        Rating rating;
-        int params;
         Output.print("Constructors");
         Output.minorLineBreak();
-        for (Constructor c : constructors) {
-            params = c.getNoOfParameters();
-            if (params > 0) {
-                Output.print("Parameters: " + c.getParameters().toString());
-                rating = Ratings.getParametersRating(params);
-                if (!rating.equals(Rating.GOOD)) {
-                    Output.print(rating + " WARNING: " + params + " params");
+
+        boolean warning = false;
+        if (!constructors.isEmpty()) {
+            for (Constructor c : constructors) {
+                int params = c.getNoOfParameters();
+                if (params > 0) {
+                    Rating rating = Ratings.getParametersRating(params);
+                    if (!rating.equals(Rating.GOOD)) {
+                        Output.print("Params: " + c.getParameters().toString());
+                        Output.print(rating + " warning for param length");
+                        warning = true;
+                    }
+                } else {
+                    Output.print("No parameters");
                 }
-            } else {
-                Output.print("No parameters");
             }
+        }
+
+        // No smells detected
+        if (!warning) {
+            Output.print("No problems here.");
         }
     }
 
@@ -194,24 +214,26 @@ public class Controller {
      * @param methods - the methods analysed.
      */
     private void showMethodResults(List<Method> methods) {
-        Rating pRating;
-        Rating mRating;
-        String name;
-        int lines;
-        int param;
+        boolean warning = false;
         Output.print("Methods");
         Output.minorLineBreak();
         for (Method method : methods) {
-            name = method.getName();
-            lines = method.getLines();
-            param = method.getParameters().size();
-            mRating = Ratings.getMethodLinesRating(lines);
-            pRating = Ratings.getParametersRating(param);
+            String name = method.getName();
+            int lines = method.getLines();
+            int param = method.getParameters().size();
+            Rating mRating = Ratings.getMethodLinesRating(lines);
+            Rating pRating = Ratings.getParametersRating(param);
             if (!mRating.equals(Rating.GOOD) || !pRating.equals(Rating.GOOD)) {
                 Output.print(name);
                 Output.print("\t" + mRating + " WARNING: " + lines + " lines");
                 Output.print("\t" + pRating + " WARNING: " + param + " params");
+                warning = true;
             }
+        }
+
+        // No smells detected
+        if (!warning) {
+            Output.print("No problems here.");
         }
     }
 }

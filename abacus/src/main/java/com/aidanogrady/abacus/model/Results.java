@@ -156,21 +156,35 @@ public class Results {
         for (Method m : methods) {
             params.addAll(m.getParameters());
         }
-        System.out.println(params);
 
         // get powerSet, removing sets of size 0 and 1
         Iterator<Set<Parameter>> powerSet = powerSet(params).iterator();
         while (powerSet.hasNext()) {
             Set<Parameter> set = powerSet.next();
 
-            if (set.size() > 1) {
+            if (set.size() > 1 && (countOccurrences(set) > 1)) {
                 dataClumps.add(set);
             }
         }
 
         // now to remove sets that aren't data clumps.
-        System.out.println(dataClumps);
         return dataClumps;
+    }
+
+    private int countOccurrences(Set<Parameter> dataClump) {
+        int occurrences = 0;
+
+        for (Constructor c : constructors) {
+            if (c.getParameters().containsAll(dataClump))
+                occurrences++;
+        }
+        for (Method m : methods) {
+            if (m.getParameters().containsAll(dataClump))
+                occurrences++;
+        }
+
+        return occurrences;
+
     }
 
     /*

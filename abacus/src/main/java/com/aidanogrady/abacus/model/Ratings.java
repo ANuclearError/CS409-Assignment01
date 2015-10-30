@@ -10,17 +10,24 @@ package com.aidanogrady.abacus.model;
  */
 public class Ratings {
 
-    public static Rating getClassRating(int fields, int methods) {
+    public static Rating getClassFieldsRating(int fields) {
         int fieldMin = 10;
         int fieldMax = 20;
-        int methodMin = 20;
-        int methodMax = 30;
-        if (fields < fieldMin && methods < methodMin)
+        if (fields < fieldMin)
             return Rating.GOOD;
-        if (fields > fieldMax && methods < methodMax)
+        if (fields > fieldMax)
             return Rating.BAD;
         return Rating.DODGY;
+    }
 
+    public static Rating getClassMethodsRating(int methods) {
+        int methodMin = 20;
+        int methodMax = 30;
+        if (methods < methodMin)
+            return Rating.GOOD;
+        if (methods < methodMax)
+            return Rating.BAD;
+        return Rating.DODGY;
     }
 
     public static Rating getMethodLinesRating(int lines) {
