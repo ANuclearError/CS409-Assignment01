@@ -14,7 +14,7 @@ public class Driver {
 
     private static final String ACRONYM = "ABACUS";
 
-    private static final String VERSION = "v0.6";
+    private static final String VERSION = "v1.0";
 
     private static final String NAME =
             "A Benevolent Analysis of Codes' Unsavoury Smells";
