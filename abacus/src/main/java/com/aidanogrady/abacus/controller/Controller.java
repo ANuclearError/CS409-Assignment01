@@ -184,24 +184,23 @@ public class Controller {
      * @param methods - the methods analysed.
      */
     private void showMethodResults(List<Method> methods) {
-        Rating rating;
+        Rating pRating;
+        Rating mRating;
         String name;
         int lines;
-        int params;
+        int param;
         Output.print("Methods");
         Output.minorLineBreak();
         for (Method method : methods) {
             name = method.getName();
             lines = method.getLines();
-            params = method.getParameters();
-            Output.print(name);
-            rating = Ratings.getMethodLinesRating(lines);
-            if (!rating.equals(Rating.GOOD)) {
-                Output.print("\t" + rating + " WARNING: " + lines + " lines");
-            }
-            rating = Ratings.getParametersRating(params);
-            if (!rating.equals(Rating.GOOD)) {
-                Output.print("\t" + rating + " WARNING: " + params + " params");
+            param = method.getParameters();
+            mRating = Ratings.getMethodLinesRating(lines);
+            pRating = Ratings.getParametersRating(param);
+            if (!mRating.equals(Rating.GOOD) || !pRating.equals(Rating.GOOD)) {
+                Output.print(name);
+                Output.print("\t" + mRating + " WARNING: " + lines + " lines");
+                Output.print("\t" + pRating + " WARNING: " + param + " params");
             }
         }
     }

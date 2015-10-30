@@ -13,8 +13,8 @@ public class Ratings {
     public static Rating getClassRating(int fields, int methods) {
         int fieldMin = 10;
         int fieldMax = 20;
-        int methodMin = 25;
-        int methodMax = 100;
+        int methodMin = 20;
+        int methodMax = 30;
         if (fields < fieldMin && methods < methodMin)
             return Rating.GOOD;
         if (fields > fieldMax && methods < methodMax)
@@ -24,8 +24,8 @@ public class Ratings {
     }
 
     public static Rating getMethodLinesRating(int lines) {
-        int min = 65;
-        int max = 200;
+        int min = 30;
+        int max = 60;
         if (lines < min)
             return Rating.GOOD;
         if (lines > max)
