@@ -3,12 +3,14 @@ package com.aidanogrady.abacus.controller;
 import com.aidanogrady.abacus.model.*;
 import com.aidanogrady.abacus.view.Input;
 import com.aidanogrady.abacus.view.Output;
+import com.github.javaparser.ast.body.Parameter;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The controller class is the main hub of the system. It controls the flow of
@@ -117,7 +119,13 @@ public class Controller {
             Output.print("I'd maybe look into this.\n");
         }
 
-        results.getDataClumps();
+        List<Set<Parameter>> dataClumps = results.getDataClumps();
+        if (!dataClumps.isEmpty()) {
+            Output.print("The following data clumps were detected");
+            for (Set<Parameter> dataClump : dataClumps) {
+                Output.print("\t" + dataClump);
+            }
+        }
 
         rating = Ratings.getClassRating(fields, methods);
         if (!rating.equals(Rating.GOOD)) {

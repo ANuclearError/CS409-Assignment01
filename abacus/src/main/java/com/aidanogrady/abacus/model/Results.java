@@ -167,6 +167,8 @@ public class Results {
                 dataClumps.add(set);
             }
         }
+
+        // now to remove sets that aren't data clumps.
         System.out.println(dataClumps);
         return dataClumps;
     }
