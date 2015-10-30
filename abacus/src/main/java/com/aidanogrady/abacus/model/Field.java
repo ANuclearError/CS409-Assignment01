@@ -33,7 +33,7 @@ public class Field {
     public boolean isPrimitive() {
         List<String> primTypes = new ArrayList<String>();
         String[] prims = {"byte", "short", "int", "long", "float",
-        "double", "boolean", "char", "String"};
+        "double", "boolean", "char"};
         primTypes.addAll(Arrays.asList(prims));
         return primTypes.contains(type.toString());
     }

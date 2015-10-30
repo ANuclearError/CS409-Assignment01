@@ -3,8 +3,7 @@ package com.aidanogrady.abacus.model;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.type.Type;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * The results class contains all the results of the smell. It contains each of
@@ -38,21 +37,9 @@ public class Results {
     private List<Method> methods;
 
     /**
-     * The number of fields in a Java class.
-     */
-    private int noOfFields;
-
-    /**
-     * The number of methods in a Java class.
-     */
-    private int noOfMethods;
-
-    /**
      * Constructor.
      */
     public Results () {
-        noOfFields = 0;
-        noOfMethods = 0;
         fields = new ArrayList<Field>();
         constructors = new ArrayList<Constructor>();
         methods = new ArrayList<Method>();
@@ -83,7 +70,7 @@ public class Results {
      * @param length - the length of the method.
      * @param params - the number of parameters method has.
      */
-    public void addMethod(String name, int length, int params) {
+    public void addMethod(String name, int length, List<Parameter> params) {
         methods.add(new Method(name, length, params));
     }
 
@@ -156,5 +143,56 @@ public class Results {
      */
     public void setIsDataClass(boolean isDataClass) {
         this.isDataClass = isDataClass;
+    }
+
+    public List<Set<Parameter>> getDataClumps() {
+        List<Set<Parameter>> dataClumps = new ArrayList<Set<Parameter>>();
+
+        // Get parameters
+        Set<Parameter> params = new HashSet<Parameter>();
+        for (Constructor c : constructors) {
+            params.addAll(c.getParameters());
+        }
+        for (Method m : methods) {
+            params.addAll(m.getParameters());
+        }
+        System.out.println(params);
+
+        // get powerSet, removing sets of size 0 and 1
+        Iterator<Set<Parameter>> powerSet = powerSet(params).iterator();
+        while (powerSet.hasNext()) {
+            Set<Parameter> set = powerSet.next();
+
+            if (set.size() > 1) {
+                dataClumps.add(set);
+            }
+        }
+        System.out.println(dataClumps);
+        return dataClumps;
+    }
+
+    /*
+     * Borrowed from:
+     * http://stackoverflow.com/questions/1670862/obtaining-a-powerset-of-a-set-in-java
+     *
+     * Tweaked because I don't want sets of size one.
+     */
+    private static <T> Set<Set<T>> powerSet(Set<T> originalSet) {
+        Set<Set<T>> sets = new HashSet<Set<T>>();
+        if (originalSet.isEmpty()) {
+            sets.add(new HashSet<T>());
+            return sets;
+        }
+        List<T> list = new ArrayList<T>(originalSet);
+        T head = list.get(0);
+        Set<T> rest = new HashSet<T>(list.subList(1, list.size()));
+        for (Set<T> set : powerSet(rest)) {
+            Set<T> newSet = new HashSet<T>();
+            newSet.add(head);
+            newSet.addAll(set);
+            sets.add(newSet);
+            sets.add(set);
+        }
+        return sets;
     }
 }

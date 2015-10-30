@@ -4,6 +4,7 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.type.PrimitiveType;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 /**
@@ -65,7 +66,7 @@ public class Analyser extends VoidVisitorAdapter {
         int endLine = n.getEndLine();
         int length = endLine - startLine;
         String name = n.getName();
-        results.addMethod(name, length, n.getParameters().size());
+        results.addMethod(name, length, n.getParameters());
 
         // Since we have a method that isn't a getter/setter, we probably don't
         // have a data class. Could maybe be more sophisticated.

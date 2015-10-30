@@ -1,5 +1,9 @@
 package com.aidanogrady.abacus.model;
 
+import com.github.javaparser.ast.body.Parameter;
+
+import java.util.List;
+
 /**
  * This class holds collected information about a method.
  *
@@ -18,9 +22,10 @@ public class Method {
     private int lines;
 
     /**
-     * The number of parameters the method has.
+     * A list of the parameters of a constructor. Due to Java syntax, this is
+     * technically a constructor's unique identifer.
      */
-    private int parameters;
+    List<Parameter> parameters;
 
     /**
      * Constructor
@@ -28,7 +33,7 @@ public class Method {
      * @param lines - lines
      * @param parameters - parameters
      */
-    public Method(String name, int lines, int parameters) {
+    public Method(String name, int lines, List<Parameter> parameters) {
         this.name = name;
         this.lines = lines;
         this.parameters = parameters;
@@ -54,7 +59,7 @@ public class Method {
      * Returns number of parameters of method.
      * @return parameters.
      */
-    public int getParameters() {
+    public List<Parameter> getParameters() {
         return parameters;
     }
 }

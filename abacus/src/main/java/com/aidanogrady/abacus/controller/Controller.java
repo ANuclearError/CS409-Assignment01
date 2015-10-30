@@ -117,6 +117,8 @@ public class Controller {
             Output.print("I'd maybe look into this.\n");
         }
 
+        results.getDataClumps();
+
         rating = Ratings.getClassRating(fields, methods);
         if (!rating.equals(Rating.GOOD)) {
             Output.print(rating + " WARNING!");
@@ -194,7 +196,7 @@ public class Controller {
         for (Method method : methods) {
             name = method.getName();
             lines = method.getLines();
-            param = method.getParameters();
+            param = method.getParameters().size();
             mRating = Ratings.getMethodLinesRating(lines);
             pRating = Ratings.getParametersRating(param);
             if (!mRating.equals(Rating.GOOD) || !pRating.equals(Rating.GOOD)) {
